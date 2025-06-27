@@ -33,19 +33,17 @@ const logger = pino({
           translateTime: 'SYS:standard',
           ignore: 'pid,hostname',
           // We don't specify a 'destination' here, so it goes to the console.
+          // messageFormat: '[{level}] {msg} {if user}--> (User: {user.UserEmail}){end}',
         },
       },
       // Target 2: Clean, JSON logs sent to a file.
       {
-        target: 'pino/file',
-        // target: 'pino-pretty',
+        target: 'pino/file', 
 
-        // Log 'info' and above to the file during debug,
-        // and 'warn' and above in normal mode to keep the file clean.
-        level: isDebugging ? 'warn' : 'info',
+        // Log 'debug' and above to the file during debug,
+        // and 'info' and above in normal mode to keep the file clean.
+        level: isDebugging ? 'debug' : 'info',
         options: {
-          colorize: true,
-          translateTime: 'SYS:standard',
           destination: 'app.log',
         },
       },

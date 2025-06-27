@@ -7,11 +7,10 @@ import createOrder from "./routes/order.routes.js";
 import review from "./routes/review.routes.js";
 import transections from "./routes/transection.routes.js";
 import cors from 'cors';
-
+import logger from "./utils/logger.js";
 
 const app = express();
-dotenv.config({path:"../.env"});
-console.log("dekjo",process.env.PORT)
+// console.log("dekjo",process.env.PORT)
 const PORT = process.env.PORT;
 app.use(express.json())
 
@@ -20,6 +19,7 @@ app.use(cors({
   credentials: true,
 }));
 // app.use(cors());
+logger.info("Server is running at http://localhost:"+PORT);
 
 app.use("/api/auth",authRoutes)
 app.use("/api/product",productRoute)
@@ -29,6 +29,5 @@ app.use("/api/transections",transections)
 
 
 app.listen(PORT,()=>{
-    console.log("Server is running at http://localhost:"+PORT);
     connectDB();
 })
